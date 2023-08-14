@@ -12,12 +12,12 @@ Welcome to this compelling venture—an opportunity to test-drive the capabiliti
 ## Project Setup in Motion
 Go ahead and setup the project through the following steps:
 
+1. This will install all the dependencies, create a prisma sqlite file, and also generate the prisma client, and zod schemas.
 ```console
 npm run setup
 ```
 
-This will install all the dependencies, create a prisma sqlite file, and also generate the prisma client, and zod schemas.
-
+2. Start the server
 ```console
 npm start
 ```
