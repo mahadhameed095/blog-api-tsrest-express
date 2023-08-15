@@ -6,6 +6,7 @@ import * as Contracts from "@/contracts";
 import * as Routers from "@/routers";
 import { Auth } from '@/middleware';
 import { generateOpenApi } from '@ts-rest/open-api';
+import { patchOpenAPIDocument } from '@/utils';
 import * as swaggerUi from 'swagger-ui-express';
 import 'dotenv/config';
 
@@ -13,7 +14,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 createExpressEndpoints(Contracts.UserContract, Routers.UserRouter, app);
 
 createExpressEndpoints(Contracts.PostContract, Routers.PostRouter, app, {
@@ -28,17 +28,7 @@ const openApiDocument = generateOpenApi(Contracts.ApiContract, {
   },
 });
 
-openApiDocument.components = openApiDocument.components || {};
-openApiDocument.components.securitySchemes = openApiDocument.components.securitySchemes || {};
-openApiDocument.components.securitySchemes.auth = {
-  type : 'apiKey',
-  in : 'header',
-  name : 'authorization' 
-}
-openApiDocument.security = openApiDocument.security || [];
-openApiDocument.security.push({
-  auth : []
-});
+patchOpenAPIDocument(openApiDocument);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument));
 const port = process.env.PORT || 3000;
