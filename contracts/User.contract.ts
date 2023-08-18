@@ -12,7 +12,7 @@ const UserContract = contract.router({
             400 : contract.type<{ message: "User already exists" }>(),
             201: UserSchema
                   .omit({ password : true})
-                  .merge(z.object({ token : z.string() }))
+                //   .merge(z.object({ token : z.string() }))
         },
         body: UserSchema.pick({ name : true, email : true, password : true}),
         summary : 'Register a user'
