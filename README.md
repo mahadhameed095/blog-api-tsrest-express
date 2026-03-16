@@ -1,4 +1,4 @@
-# Blog API — ts-rest + Express
+# Blog API - ts-rest + Express
 
 A simple blog REST API built to explore ts-rest's contract-based, 
 type-safe API development pattern.
